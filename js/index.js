@@ -16,6 +16,8 @@ const winningMessageElement = document.getElementById('winningMessage')
 const restartButton = document.getElementById('restartButton')
 const winningMessageTextElement = document.querySelector('[data-winning-message-text]')
 const chooseSideElement = document.getElementById('chooseSide')
+var Xscore = 0
+var Oscore = 0
 let circleTurn
 
 startGame()
@@ -42,12 +44,13 @@ function chooseYourSide(){
 
 function startGame() {
   chooseYourSide()
+  displayScore()
+  showTurn()
   if(circleTurn == 'X'){
     circleTurn = false
   }else{
     circleTurn = true
   }
-  console.log(chooseYourSide.playerX)
   cellElements.forEach(cell => {
     cell.classList.remove(X_CLASS)
     cell.classList.remove(CIRCLE_CLASS)
@@ -77,6 +80,8 @@ function endGame(draw) {
     winningMessageTextElement.innerText = 'Draw!'
   } else {
     winningMessageTextElement.innerText = `${circleTurn ? "O's" : "X's"} Wins!`
+    circleTurn ? Oscore += 1 : Xscore += 1
+    console.log(`Xscore: ${Xscore} \n O Score: ${Oscore}`)
   }
   winningMessageElement.classList.add('show')
 }
@@ -89,8 +94,12 @@ function isDraw() {
 
 function placeMark(cell, currentClass) {
   cell.classList.add(currentClass)
+  console.log(`This is placemark class --> cell: ${cell} current Class: ${currentClass}`)
+  showTurn()
 }
-
+function showTurn(){
+  document.querySelector('[data-turn]').textContent = `${circleTurn}'s turn`
+}
 function swapTurns() {
   circleTurn = !circleTurn
 }
@@ -111,4 +120,9 @@ function checkWin(currentClass) {
       return cellElements[index].classList.contains(currentClass)
     })
   })
+}
+
+function displayScore(){
+  document.querySelector('[data-x-score]').textContent = Xscore
+  document.querySelector('[data-o-score]').textContent = Oscore
 }

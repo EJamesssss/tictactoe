@@ -5,7 +5,7 @@
   }
 
   :root {
-    --cell-size: 100px;
+    --cell-size: 7rem;
     --mark-size: calc(var(--cell-size) * .9);
     --all-fonts: 'Permanent Marker', cursive;
   }
@@ -14,9 +14,38 @@
       margin: 0;
   }
 
+  .titles{
+    display: flex;
+    font-family: var(--all-fonts);
+    justify-content: center;
+    align-content: center;
+    justify-items: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 0;
+  }
+
+  .titles p{
+    font-size: 3rem;
+    padding: 0;
+    margin: 0;
+  }
+
+  .displayScore{
+    display: flex;
+    gap: 10rem;
+  }
+
+  .displayScore span{
+    color: blue;
+  }
+
+
+
+  
   .board {
     width: 100vw;
-    height: 100vh;
+    height: 50vh;
     display: grid;
     justify-content: center;
     align-content: center;
@@ -164,4 +193,16 @@
   
   .choose-side.show {
     display: flex;
+  }
+
+  @media (orientation: portrait) {
+    .titles{
+      display: flex;
+      flex-direction: column;
+    }
+    .displayScore{
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
   }
