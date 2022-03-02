@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,400;0,600;1,800&family=Josefin+Sans:wght@400;600&family=Nunito&family=Permanent+Marker&display=swap');
+
 *, *::after, *::before {
     box-sizing: border-box;
   }
@@ -5,6 +7,7 @@
   :root {
     --cell-size: 100px;
     --mark-size: calc(var(--cell-size) * .9);
+    --all-fonts: 'Permanent Marker', cursive;
   }
 
   body{
@@ -106,6 +109,7 @@
   color: white;
   font-size: 5rem;
   flex-direction: column;
+  font-family: var(--all-fonts);
 }
 
 .winning-message button {
@@ -139,6 +143,7 @@
     color: white;
     font-size: 5rem;
     flex-direction: column;
+    font-family: var(--all-fonts);
   }
   
   .choose-side button {
