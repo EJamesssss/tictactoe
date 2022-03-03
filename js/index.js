@@ -97,7 +97,7 @@ function isDraw() {
 
 function placeMark(cell, currentClass) {
   cell.classList.add(currentClass)
-  console.log(`This is placemark class --> cell: ${cell} current Class: ${currentClass}`)
+  console.log(`cell: ${cell.innerText} current Class: ${currentClass}`)
   showTurn()
 }
 function showTurn(){
