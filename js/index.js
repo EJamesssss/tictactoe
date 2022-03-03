@@ -16,6 +16,7 @@ const winningMessageElement = document.getElementById('winningMessage')
 const restartButton = document.getElementById('restartButton')
 const winningMessageTextElement = document.querySelector('[data-winning-message-text]')
 const chooseSideElement = document.getElementById('chooseSide')
+var turnIndicator = document.querySelector('[data-turn]')
 var Xscore = 0
 var Oscore = 0
 let circleTurn
@@ -78,10 +79,12 @@ function handleClick(e) {
 function endGame(draw) {
   if (draw) {
     winningMessageTextElement.innerText = 'Draw!'
+    turnIndicator.textContent = ""
   } else {
     winningMessageTextElement.innerText = `${circleTurn ? "O's" : "X's"} Wins!`
     circleTurn ? Oscore += 1 : Xscore += 1
     console.log(`Xscore: ${Xscore} \n O Score: ${Oscore}`)
+    turnIndicator.textContent = ""
   }
   winningMessageElement.classList.add('show')
 }
@@ -98,7 +101,15 @@ function placeMark(cell, currentClass) {
   showTurn()
 }
 function showTurn(){
-  document.querySelector('[data-turn]').textContent = `${circleTurn}'s turn`
+  if(circleTurn == true){
+    turnIndicator.textContent = `X's turn`
+  }else if(circleTurn == false){
+    turnIndicator.textContent = `O's turn`
+  }else if(circleTurn == undefined){
+    turnIndicator.textContent = ""
+  }else{
+    turnIndicator.textContent = `${circleTurn}'s turn`
+  }
 }
 function swapTurns() {
   circleTurn = !circleTurn
