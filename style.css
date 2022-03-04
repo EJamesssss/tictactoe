@@ -27,7 +27,6 @@
     justify-items: center;
     align-items: center;
     flex-direction: column;
-    margin-top: 4rem;
     font-size: 0;
     color: #16181A ;
   }
@@ -84,7 +83,7 @@
 
   .moveHistory{
     width: 100vw;
-    height: 50vh;
+    height: 20vh;
     display: grid;
     justify-content: center;
     align-content: center;
@@ -93,9 +92,10 @@
   }
 
   .moveContent{
+    margin-top: 0, auto;
     border: 1px solid black;
     width: calc(var(--cell-size)*3);
-    height: 30vh;
+    height: 25vh;
     background-color: whitesmoke;
     overflow: auto;
     font-family: var(--all-fonts);
