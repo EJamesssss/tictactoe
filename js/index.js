@@ -17,9 +17,13 @@ const restartButton = document.getElementById('restartButton')
 const winningMessageTextElement = document.querySelector('[data-winning-message-text]')
 const chooseSideElement = document.getElementById('chooseSide')
 var turnIndicator = document.querySelector('[data-turn]')
+var historyCount = 1
+var historyContent  = document.querySelector('[data-history-display]')
 var Xscore = 0
 var Oscore = 0
 let circleTurn
+var moveHistoryArray = []
+var nextMoveHistory = []
 
 startGame()
 
@@ -47,6 +51,7 @@ function startGame() {
   chooseYourSide()
   displayScore()
   showTurn()
+  clearHistory()
   if(circleTurn == 'X'){
     circleTurn = false
   }else{
@@ -99,6 +104,21 @@ function placeMark(cell, currentClass) {
   cell.classList.add(currentClass)
   console.log(`cell: ${cell.innerText} current Class: ${currentClass}`)
   showTurn()
+  //Record Move
+  moveHistoryArray.push([cell.innerText,currentClass])
+  console.log(moveHistoryArray)
+  //Add history Function
+  if(currentClass == 'x'){
+    currentClass = 'X'
+  }else{
+    currentClass = 'O'
+  }
+  var pTag = document.createElement('p')
+  var moveContent = document.createTextNode(`${historyCount}.)  player ${currentClass} move in tile ${cell.innerText}`)
+  pTag.appendChild(moveContent)
+  historyContent.appendChild(pTag)
+  historyCount += 1
+
 }
 function showTurn(){
   if(circleTurn == true){
@@ -110,6 +130,7 @@ function showTurn(){
   }else{
     turnIndicator.textContent = `${circleTurn}'s turn`
   }
+  
 }
 function swapTurns() {
   circleTurn = !circleTurn
@@ -137,3 +158,21 @@ function displayScore(){
   document.querySelector('[data-x-score]').textContent = Xscore
   document.querySelector('[data-o-score]').textContent = Oscore
 }
+
+// HISTORY
+
+function clearHistory(){
+  historyContent.innerHTML = ""
+  historyCount =1
+  moveHistoryArray = []
+  nextMoveHistory = []
+}
+
+function selectChild(){
+  
+  var currentCell = document.getElementsByClassName('cell')[0].textContent
+  console.log(currentCell)
+}
+selectChild()
+//Previous
+
