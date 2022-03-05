@@ -24,6 +24,8 @@ var Oscore = 0
 let circleTurn
 var moveHistoryArray = []
 var nextMoveHistory = []
+var boardHistory = []
+var cell
 
 startGame()
 
@@ -68,7 +70,7 @@ function startGame() {
 }
 
 function handleClick(e) {
-  const cell = e.target
+  cell = e.target
   const currentClass = circleTurn ? CIRCLE_CLASS : X_CLASS
   placeMark(cell, currentClass)
   if (checkWin(currentClass)) {
@@ -80,6 +82,26 @@ function handleClick(e) {
     setBoardHoverClass()
   }
 }
+function checkCell(){
+  var lastMove = moveHistoryArray.pop()
+  nextMoveHistory.push(lastMove)
+  var lastClass = lastMove[1]
+  var targetCell = lastMove[0]
+  targetCell.classList.remove(lastClass)
+  console.log(targetCell)
+}
+
+function showNextMove(){
+  var redoMove = nextMoveHistory.pop()
+  var nextclass = redoMove[1]
+  var nextCell = redoMove[0]
+  nextCell.classList.add(nextclass)
+  console.log(nextCell)
+}
+var nxtBtn = document.getElementById('btnNextMove')
+nxtBtn.addEventListener('click',showNextMove)
+var prevBtn = document.getElementById('btnPreviousMove')
+prevBtn.addEventListener('click',checkCell)
 
 function endGame(draw) {
   if (draw) {
@@ -105,7 +127,8 @@ function placeMark(cell, currentClass) {
   console.log(`cell: ${cell.innerText} current Class: ${currentClass}`)
   showTurn()
   //Record Move
-  moveHistoryArray.push([cell.innerText,currentClass])
+  moveHistoryArray.push([cell,currentClass])
+  boardHistory.push([cell,currentClass])
   console.log(moveHistoryArray)
   //Add history Function
   if(currentClass == 'x'){
@@ -174,5 +197,21 @@ function selectChild(){
   console.log(currentCell)
 }
 selectChild()
-//Previous
+//Previous Game
 
+// function showPrevGame(){
+//   cellElements.forEach(cell => {
+//     cell.classList.remove(X_CLASS)
+//     cell.classList.remove(CIRCLE_CLASS)
+//     cell.removeEventListener('click', handleClick)
+//     cell.addEventListener('click', handleClick, { once: true })
+//     winningMessageElement.classList.remove('show')
+    
+// })}
+
+function showPrevGame(){
+  winningMessageElement.classList.remove('show')
+}
+
+const btnPrevGame = document.getElementById('prevGame')
+btnPrevGame.addEventListener('click',showPrevGame)
