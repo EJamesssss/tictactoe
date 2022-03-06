@@ -93,6 +93,7 @@ function checkCell(){
 
 function showNextMove(){
   var redoMove = nextMoveHistory.pop()
+  moveHistoryArray.push(redoMove)
   var nextclass = redoMove[1]
   var nextCell = redoMove[0]
   nextCell.classList.add(nextclass)
@@ -199,19 +200,11 @@ function selectChild(){
 selectChild()
 //Previous Game
 
-// function showPrevGame(){
-//   cellElements.forEach(cell => {
-//     cell.classList.remove(X_CLASS)
-//     cell.classList.remove(CIRCLE_CLASS)
-//     cell.removeEventListener('click', handleClick)
-//     cell.addEventListener('click', handleClick, { once: true })
-//     winningMessageElement.classList.remove('show')
-    
-// })}
-
 function showPrevGame(){
   winningMessageElement.classList.remove('show')
 }
 
 const btnPrevGame = document.getElementById('prevGame')
 btnPrevGame.addEventListener('click',showPrevGame)
+
+document.getElementById('btnNextGame').addEventListener('click',startGame)
