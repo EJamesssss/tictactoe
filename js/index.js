@@ -14,6 +14,7 @@ const cellElements = document.querySelectorAll('[data-cell]')
 const board = document.getElementById('board')
 const winningMessageElement = document.getElementById('winningMessage')
 const restartButton = document.getElementById('restartButton')
+const nextGameBtn = document.getElementById('btnNextGame')
 const winningMessageTextElement = document.querySelector('[data-winning-message-text]')
 const chooseSideElement = document.getElementById('chooseSide')
 var turnIndicator = document.querySelector('[data-turn]')
@@ -67,6 +68,7 @@ function startGame() {
   })
   setBoardHoverClass()
   winningMessageElement.classList.remove('show')
+  nextGameBtn.disabled = true
 }
 
 function handleClick(e) {
@@ -202,9 +204,10 @@ selectChild()
 
 function showPrevGame(){
   winningMessageElement.classList.remove('show')
+  nextGameBtn.disabled = false
 }
 
 const btnPrevGame = document.getElementById('prevGame')
 btnPrevGame.addEventListener('click',showPrevGame)
 
-document.getElementById('btnNextGame').addEventListener('click',startGame)
+nextGameBtn.addEventListener('click',startGame)
