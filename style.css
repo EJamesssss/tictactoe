@@ -237,6 +237,23 @@
     display: flex;
   }
 
+  .commandButtons button{
+    margin-left: 1.5rem;
+    font-family: var(--bold-font);
+    background-color: white;
+    border: 1px solid black;
+    padding: .25em .5em;
+    cursor: pointer;
+  }
+  .childButtons:hover {
+    background-color: black;
+    color: white;
+    border-color: white;
+  }
+  .childButtons.fx{
+    pointer-events: none;
+  }
+
   @media (orientation: portrait) {
     .titles{
       display: flex;

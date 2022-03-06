@@ -17,6 +17,9 @@ const restartButton = document.getElementById('restartButton')
 const nextGameBtn = document.getElementById('btnNextGame')
 const winningMessageTextElement = document.querySelector('[data-winning-message-text]')
 const chooseSideElement = document.getElementById('chooseSide')
+const nxtBtn = document.getElementById('btnNextMove')
+const prevBtn = document.getElementById('btnPreviousMove')
+const btnPrevGame = document.getElementById('prevGame')
 var turnIndicator = document.querySelector('[data-turn]')
 var historyCount = 1
 var historyContent  = document.querySelector('[data-history-display]')
@@ -69,6 +72,8 @@ function startGame() {
   setBoardHoverClass()
   winningMessageElement.classList.remove('show')
   nextGameBtn.disabled = true
+  nextGameBtn.classList.add('fx')
+  checkBtnActive()
 }
 
 function handleClick(e) {
@@ -84,13 +89,14 @@ function handleClick(e) {
     setBoardHoverClass()
   }
 }
-function checkCell(){
+function showPrevMove(){
   var lastMove = moveHistoryArray.pop()
   nextMoveHistory.push(lastMove)
   var lastClass = lastMove[1]
   var targetCell = lastMove[0]
   targetCell.classList.remove(lastClass)
   console.log(targetCell)
+  checkBtnActive()
 }
 
 function showNextMove(){
@@ -100,11 +106,11 @@ function showNextMove(){
   var nextCell = redoMove[0]
   nextCell.classList.add(nextclass)
   console.log(nextCell)
+  checkBtnActive()
 }
-var nxtBtn = document.getElementById('btnNextMove')
+
 nxtBtn.addEventListener('click',showNextMove)
-var prevBtn = document.getElementById('btnPreviousMove')
-prevBtn.addEventListener('click',checkCell)
+prevBtn.addEventListener('click',showPrevMove)
 
 function endGame(draw) {
   if (draw) {
@@ -144,6 +150,7 @@ function placeMark(cell, currentClass) {
   pTag.appendChild(moveContent)
   historyContent.appendChild(pTag)
   historyCount += 1
+  checkBtnActive()
 
 }
 function showTurn(){
@@ -205,9 +212,27 @@ selectChild()
 function showPrevGame(){
   winningMessageElement.classList.remove('show')
   nextGameBtn.disabled = false
+  nextGameBtn.classList.remove('fx')
 }
 
-const btnPrevGame = document.getElementById('prevGame')
+
 btnPrevGame.addEventListener('click',showPrevGame)
 
 nextGameBtn.addEventListener('click',startGame)
+
+function checkBtnActive(){
+  if(moveHistoryArray.length < 1){
+    prevBtn.disabled = true
+    prevBtn.classList.add('fx')
+  }else{
+    prevBtn.disabled = false
+    prevBtn.classList.remove('fx')
+  }
+  if(nextMoveHistory.length < 1){
+    nxtBtn.disabled = true
+    nxtBtn.classList.add('fx')
+  }else{
+    nxtBtn.disabled = false
+    nxtBtn.classList.remove('fx')
+  }
+}
